@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P2P-file-transfer", "P2P-file-transfer.csproj", "{BDEDB54F-0D7C-4352-937E-8DCD6F382D31}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDEDB54F-0D7C-4352-937E-8DCD6F382D31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDEDB54F-0D7C-4352-937E-8DCD6F382D31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDEDB54F-0D7C-4352-937E-8DCD6F382D31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDEDB54F-0D7C-4352-937E-8DCD6F382D31}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33D0E94E-86AF-43D6-96FF-3534FAAA2645}
+	EndGlobalSection
+EndGlobal
