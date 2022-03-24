@@ -4,9 +4,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
+using System.Threading;
+
 namespace P2P_file_transfer
 {
     public partial class mainForm : Form
@@ -18,10 +19,18 @@ namespace P2P_file_transfer
 
         private void mainForm_Load(object sender, EventArgs e)
         {
-            Tcp tcp= new Tcp();
+            ReceiveMessage.run();
+            labelHostName.Text = Dns.GetHostName();
+            SendMessage.send("login");
+            Thread.Sleep(500);
+            List<string> hosts = ReceiveMessage.getList();
+            initListView(hosts);
+
+
+
         }
 
         
-        
     }
+    
 }
