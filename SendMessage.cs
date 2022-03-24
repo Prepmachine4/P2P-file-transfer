@@ -8,7 +8,7 @@ namespace P2P_file_transfer
     internal class SendMessage
     {
         static string ip = "192.168.43.239";
-        static Socket sock;
+        public static Socket sock;
         static IPEndPoint iep;
         
 
@@ -23,4 +23,5 @@ namespace P2P_file_transfer
         }
         
     }
+
 }
