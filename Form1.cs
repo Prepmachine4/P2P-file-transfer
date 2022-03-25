@@ -39,12 +39,14 @@ namespace P2P_file_transfer
         // 选择ip地址
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            int index = listView1.SelectedItems.Count;
-            GlobalData.selectIP = ReceiveMessage.hosts[index - 1].ToString();
+            int index = listView1.Items.IndexOf(listView1.FocusedItem);
+            GlobalData.selectIP = ReceiveMessage.hosts[index].ToString();
             GlobalData.form2 = new Form2();
             SendMessage.sendTo("file", GlobalData.selectIP, 5000);
             GlobalData.form2.Show();
         }
+        
+       
         public void initListView(List<string> hosts)
         {
             this.listView1.Clear();

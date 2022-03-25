@@ -101,7 +101,7 @@
             // 
             this.listView1.Font = new System.Drawing.Font("宋体", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(21, 47);
+            this.listView1.Location = new System.Drawing.Point(22, 22);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(349, 384);
             this.listView1.TabIndex = 0;
