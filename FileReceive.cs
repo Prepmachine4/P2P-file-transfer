@@ -36,7 +36,7 @@ namespace P2P_file_transfer
             catch (Exception e)
             {
 
-                GlobalData.form2.Tip(e.Message);
+                MessageBox.Show(e.Message);
 
             }
             thread=new Thread(run);
@@ -80,7 +80,7 @@ namespace P2P_file_transfer
                         os.Close();
                         conn.Close();
                         socket.Close();
-                        GlobalData.form2.Tip("成功接收文件并存入了" + path + "中!");
+                        MessageBox.Show("成功接收文件并存入了" + path + "中!");
 
                     }
 
