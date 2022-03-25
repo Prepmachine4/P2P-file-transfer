@@ -42,10 +42,22 @@ namespace P2P_file_transfer
                 length = sock.ReceiveFrom(data, ref remoteEndPoint);//此方法把数据来源ip、port放到第二个参数中
                 str= Encoding.UTF8.GetString(data,0,length);
                 if(str.StartsWith("hosts")){
-                    str = str.Substring(5);
-
-                    hosts = getList();
-                    GlobalData.form1.initListView(hosts);
+                    try
+                    {
+                        str = str.Substring(5);
+                        hosts = getList();
+                        GlobalData.form1.initListView(hosts);
+                    }
+                    catch (Exception ex)
+                    {
+                        GlobalData.form2.Tip("host更新出错"+"msg:"+ex.ToString());
+                    }
+                    
+                }
+                else if (str.StartsWith("file"))
+                {
+                    // 开启接受文件的线程
+                    GlobalData.form1.fileRecive = new FileRecive();
                 }
                 // clear
                 data = new byte[1024];

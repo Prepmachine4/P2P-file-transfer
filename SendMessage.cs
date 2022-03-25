@@ -7,21 +7,26 @@ namespace P2P_file_transfer
 {
     internal class SendMessage
     {
-        static string ip = "192.168.43.239";
-        public static Socket sock;
-        static IPEndPoint iep;
         
-
-        static SendMessage()
+ 
+        
+        public static void sendToTracker(string data)
         {
-            sock = new Socket(AddressFamily.InterNetwork,SocketType.Dgram, ProtocolType.Udp);
-            iep = new IPEndPoint(IPAddress.Parse(ip), 5000);
-        }
-        public static void send(string data)
-        {
+            string trackerIP = "192.168.43.239";
+            Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            IPEndPoint iep = new IPEndPoint(IPAddress.Parse(trackerIP), 5000);
             sock.SendTo(Encoding.ASCII.GetBytes(data), iep);
+            sock.Close();
         }
-        
+
+        public static void sendTo(string data,string ip,int port)
+        {
+            Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            IPEndPoint iep = new IPEndPoint(IPAddress.Parse(ip), port);
+            sock.SendTo(Encoding.ASCII.GetBytes(data), iep);
+            sock.Close();
+        }
+
     }
 
 }

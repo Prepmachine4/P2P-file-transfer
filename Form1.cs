@@ -14,32 +14,36 @@ namespace P2P_file_transfer
     
     public partial class mainForm : Form
     {
+        public FileRecive fileRecive;
         public mainForm()
         {
             InitializeComponent();
+
+
+
             ListView.CheckForIllegalCrossThreadCalls = false;
+
+
             GlobalData.form1 = this;
-            GlobalData.form2 = new Form2();
             ReceiveMessage.run();
             labelHostName.Text = Dns.GetHostName();
-            SendMessage.send("login");
+            labelIP.Text = GetLocalIp();
+            SendMessage.sendToTracker("login");
+
+            
+
         }
+
+      
         
-        /// <summary>
-        /// 退出程序
-        /// </summary>
-        
-        
-        private void listView1_Click(object sender, EventArgs e)
+        // 选择ip地址
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            
             int index = listView1.SelectedItems.Count;
-            GlobalData.selectIP= ReceiveMessage.hosts[index-1].ToString();
-            label1.Text = GlobalData.selectIP;
-            
+            GlobalData.selectIP = ReceiveMessage.hosts[index - 1].ToString();
+            GlobalData.form2 = new Form2();
+            SendMessage.sendTo("file", GlobalData.selectIP, 5000);
             GlobalData.form2.Show();
-
-
         }
         public void initListView(List<string> hosts)
         {
@@ -71,12 +75,14 @@ namespace P2P_file_transfer
         }
         private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SendMessage.send("logout");
+            SendMessage.sendToTracker("logout");
 
             // close
             ReceiveMessage.threadReceive.Abort();
             ReceiveMessage.sock.Close();
-            SendMessage.sock.Close();
+
+
+
 
         }
         private void mainForm_Load(object sender, EventArgs e)
@@ -85,7 +91,7 @@ namespace P2P_file_transfer
 
         }
 
-
+        
     }
 
     public class GlobalData

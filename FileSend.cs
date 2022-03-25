@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,7 @@ namespace P2P_file_transfer
 {
     internal class FileSend
     {
-        public TcpClient client;
-        public NetworkStream stream;
+        public Socket socket;
         private string[] param;
         private Form2 fm;
         public FileSend(Form2 fm, params string[] param)
@@ -19,6 +19,11 @@ namespace P2P_file_transfer
 
             this.param = param;
             this.fm = fm;
+            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPAddress ipaddress = IPAddress.Parse(param[0]); 
+            IPEndPoint endpoint = new IPEndPoint(ipaddress, int.Parse(param[1]));
+
+            socket.Connect(endpoint);
         }
         public void Send()
         {
@@ -26,18 +31,15 @@ namespace P2P_file_transfer
             //ip, port, fileName, filePath, fileSize.ToString()
             try
             {
-                //连接接收端
-                this.client = new TcpClient(param[0], int.Parse(param[1]));
+                
                 string msg = param[0] + "|"+param[2] + "|" + param[4];
                 byte[] m = Encoding.UTF8.GetBytes(msg);
 
                 while (true)
                 {
-                    this.stream = this.client.GetStream();
-                    this.stream.Write(m, 0, m.Length);
-                    this.stream.Flush();
+                    socket.Send(m,0,m.Length,0);
                     byte[] data = new byte[1024];
-                    int len = this.stream.Read(data, 0, data.Length);
+                    int len = socket.Receive(data);
                     msg = Encoding.UTF8.GetString(data, 0, len);
                     //对方要接收我发送的文件
                     if (msg.Equals("1"))
@@ -55,13 +57,12 @@ namespace P2P_file_transfer
                             currentprogress += len;
                             //更新进度条
                             fm.UpDateProgress((int)(currentprogress * 100 / long.Parse(param[4])));
-                            this.stream.Write(data, 0, len);
+                            socket.Send(data, 0, len, 0);
 
                         }
-                        os.Flush();
-                        this.stream.Flush();
+                        
                         os.Close();
-                        this.stream.Close();
+                        socket.Close();
                         fm.Tip("发送成功!");
                         fm.Exit();
                     }

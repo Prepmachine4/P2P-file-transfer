@@ -11,7 +11,7 @@ namespace P2P_file_transfer
     public partial class Form2 : Form
     {
         private FileSend fileSend;
-        private FileRecive fileRecive;
+        private Thread sendThread;
         private string fileName;
         private string filePath;
         private long fileSize;
@@ -20,7 +20,6 @@ namespace P2P_file_transfer
             InitializeComponent();
             textBox2.Text = GlobalData.selectIP;
             textBox3.Text = "4000";
-            fileRecive = new FileRecive();
         }
 
         /// <summary>
@@ -71,7 +70,8 @@ namespace P2P_file_transfer
             }
 
             fileSend = new FileSend(this, new string[] { ip, port, fileName, filePath, fileSize.ToString() });
-            new Thread(fileSend.Send).Start();
+            sendThread=new Thread(fileSend.Send);
+            sendThread.Start();
         }
 
 
@@ -86,7 +86,7 @@ namespace P2P_file_transfer
 
             this.progressBar1.Value = value;
             this.label4.Text = value + "%";
-            System.Windows.Forms.Application.DoEvents();
+            Application.DoEvents();
         }
 
         /// <summary>
@@ -114,10 +114,12 @@ namespace P2P_file_transfer
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            fileSend.client.Close();
-            fileSend.stream.Close();
-            fileRecive.server.Stop();
-            fileRecive.stream.Close();
+            if (sendThread != null)
+            {
+                fileSend.socket.Close();
+                sendThread.Abort ();
+            }
+            
         }
     }
 }
