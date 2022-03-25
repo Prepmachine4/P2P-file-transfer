@@ -22,15 +22,7 @@ namespace P2P_file_transfer
             textBox3.Text = "4000";
         }
 
-        /// <summary>
-        /// 信息提示框
-        /// </summary>
-        /// <param name="msg"></param>
-        public void Tip(string msg)
-        {
-
-            MessageBox.Show(msg, "温馨提示");
-        }
+       
 
         private void button1_Click_1(object sender, EventArgs e)
         {
@@ -58,14 +50,13 @@ namespace P2P_file_transfer
 
             if (fileName.Length == 0)
             {
-
-                Tip("请选择文件");
+                MessageBox.Show("请选择文件");
                 return;
             }
             if (ip.Length == 0 || port.ToString().Length == 0)
             {
 
-                Tip("端口和ip地址是必须的!");
+                MessageBox.Show("端口和ip地址是必须的!");
                 return;
             }
 

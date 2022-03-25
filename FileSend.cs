@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace P2P_file_transfer
 {
@@ -63,7 +64,7 @@ namespace P2P_file_transfer
                         
                         os.Close();
                         socket.Close();
-                        fm.Tip("发送成功!");
+                        MessageBox.Show("发送成功");
                         fm.Exit();
                         break;
                     }
@@ -72,7 +73,7 @@ namespace P2P_file_transfer
             catch (Exception e)
             {
 
-                fm.Tip(e.Message);
+                MessageBox.Show(e.Message);
 
             }
 

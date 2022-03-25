@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using Newtonsoft.Json;
+using System.Windows.Forms;
 
 namespace P2P_file_transfer
 {
@@ -50,7 +51,7 @@ namespace P2P_file_transfer
                     }
                     catch (Exception ex)
                     {
-                        GlobalData.form2.Tip("host更新出错"+"msg:"+ex.ToString());
+                        MessageBox.Show("host更新出错"+"msg:"+ex.ToString());
                     }
                     
                 }
