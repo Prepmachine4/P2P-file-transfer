@@ -65,7 +65,6 @@ namespace P2P_file_transfer
                         os.Close();
                         socket.Close();
                         MessageBox.Show("发送成功");
-                        fm.Exit();
                         break;
                     }
                 }
@@ -73,7 +72,7 @@ namespace P2P_file_transfer
             catch (Exception e)
             {
 
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.ToString());
 
             }
 

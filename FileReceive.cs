@@ -81,7 +81,7 @@ namespace P2P_file_transfer
                         conn.Close();
                         socket.Close();
                         MessageBox.Show("成功接收文件并存入了" + path + "中!");
-
+                        break;
                     }
 
                 }
