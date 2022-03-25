@@ -26,7 +26,7 @@ namespace P2P_file_transfer
             
             try
             {
-                this.fm = GlobalData.form2;
+                fm = GlobalData.form2;
                 socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
                 IPAddress ipaddress = IPAddress.Parse(mainForm.GetLocalIp()); 
@@ -67,7 +67,7 @@ namespace P2P_file_transfer
                         msgs = Encoding.UTF8.GetBytes(msg);
                         conn.Send(msgs, 0, msgs.Length,0);
                         //开始接收文件
-                        string path = @"d:\p2p\" + tip[0];//接收文件的存储路径
+                        string path = @"c:\" + tip[0];//接收文件的存储路径
                         FileStream os = new FileStream(path, FileMode.OpenOrCreate);
 
                         byte[] data = new byte[1024];
@@ -88,7 +88,7 @@ namespace P2P_file_transfer
                 }
                 catch (Exception e)
                 {
-                    fm.Tip(e.Message);
+                    MessageBox.Show(e.ToString());
 
                 }
             }
