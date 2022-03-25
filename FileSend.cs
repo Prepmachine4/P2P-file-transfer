@@ -65,6 +65,7 @@ namespace P2P_file_transfer
                         socket.Close();
                         fm.Tip("发送成功!");
                         fm.Exit();
+                        break;
                     }
                 }
             }

@@ -67,7 +67,7 @@ namespace P2P_file_transfer
                         msgs = Encoding.UTF8.GetBytes(msg);
                         conn.Send(msgs, 0, msgs.Length,0);
                         //开始接收文件
-                        string path = @"c:\" + tip[0];//接收文件的存储路径
+                        string path = @"c:\" + tip[1];//接收文件的存储路径
                         FileStream os = new FileStream(path, FileMode.OpenOrCreate);
 
                         byte[] data = new byte[1024];
